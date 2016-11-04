@@ -8,5 +8,7 @@
 % l' = Ftranspose *p 
 % so l' is the epipolar line in image im' and p is the corresponding point
 % in the other image.  
+% 3d mesh can be made by taking the difference in position of the 2 corresponding points.
+%       Depth is inversely related to correspondance of two points.  
 
 
