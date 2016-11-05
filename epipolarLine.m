@@ -1,7 +1,7 @@
 % Using the calibration matrix for each image
 %    find 8 correspoding points for each image image pair.  
 %    Use [u,v,1] = M* [x,y,z,1]
-% Then find the calibration matrix, F. Solve pt*F*p2 = 0
+% Then find the fundamental matrix, F. Solve pt*F*p2 = 0
         %pt = homogeneous point in right image, transposed
         %p2 = homogeneous point in left image
 % Then the epiplolar line, l in one image can be found using this equation:

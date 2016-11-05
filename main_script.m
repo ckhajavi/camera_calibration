@@ -49,7 +49,7 @@ P(36,:) = [0 80 67 1];
 
 I1 = imread('data/DSCF4200.jpg');
 C1 = calibration(I1, P([33 34 17 18 9 10],:));
-C1_eig = calibration_eig(I1, P([33 34 17 18 9 10],:));
+%C1_eig = calibration_eig(I1, P([33 34 17 18 9 10],:));
 
 %I2 = imread('data/DSCF4198.jpg');
 %C2 = calibration(I2, P([1:3 5:7 9:11 13:15 17:19 29:31 33:35],:));
