@@ -40,6 +40,8 @@ eigVals = diag(D);  %vector of eigenvalues
 disp(size(index))
 disp(size(V))
 
+
+
 eigenVector = V(:,index(1));
 
 C = reshape(eigenVector, 4,3)'

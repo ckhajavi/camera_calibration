@@ -51,11 +51,18 @@ I1 = imread('data/DSCF4200.jpg');
 C1 = calibration(I1, P([33 34 17 18 9 10],:));
 %C1_eig = calibration_eig(I1, P([33 34 17 18 9 10],:));
 
-%I2 = imread('data/DSCF4198.jpg');
-%C2 = calibration(I2, P([1:3 5:7 9:11 13:15 17:19 29:31 33:35],:));
+I2 = imread('data/DSCF4198.jpg');
+C2 = calibration(I2, P([33 34 17 18 9 10],:));
 
 
+points = zeros(8,4); 
+for i = 1:8
+    p_homo1 = C2*P(i,:)';
+    p_homo2 = C1*P(i,:)';
+    points(i,:) = [p_homo1(1)/p_homo1(3), p_homo1(2)/p_homo1(3), p_homo2(1)/p_homo2(3), p_homo2(2)/p_homo2(3)];
+end
 
+F = fundamental(points);
 
 
 

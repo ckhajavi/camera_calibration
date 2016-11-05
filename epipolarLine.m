@@ -12,3 +12,11 @@
 %       Depth is inversely related to correspondance of two points.  
 
 
+function [epi] = epipolarLine(F, p)
+%@params = point to calculate
+    p_homo = [p(1); p(2); 1]
+    epi = F'* p_homo
+    
+
+end
+
