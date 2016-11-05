@@ -42,5 +42,5 @@ disp(size(V))
 
 eigenVector = V(:,index(1));
 
-C = eigenVector
+C = reshape(eigenVector, 4,3)'
 end
