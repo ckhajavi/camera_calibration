@@ -35,7 +35,7 @@ for i = 1:size(set,2)
         hold on
         x = 0:size(set{1,i},2);
         y = m*x+n;
-        plot(x,y);           % Plot epipolar line
+        plot(x,y, 'LineWidth', 4);           % Plot epipolar line
         
         [a,b] = ginput(1);   % Select corresponding point over the epip. line
         set{3,i} = [a,b];
@@ -43,14 +43,21 @@ for i = 1:size(set,2)
 end
 
 % 3D Depth Estimation
-A = zeros(2*size(set,2),4);     % 2 equations for each 2D point
-for i = 1:size(set,2)
-    C = set{2,i};
-    u = set{3,i}(1);
-    v = set{3,i}(2);
-    A(2*i-1,:) = [u*C(3,1)-C(1,1), u*C(3,2)-C(1,2), u*C(3,3)-C(1,3), u*C(3,4)-C(1,4)];
-    A(2*i,:) = [v*C(3,1)-C(2,1), v*C(3,2)-C(2,2), v*C(3,3)-C(2,3), v*C(3,4)-C(2,4)];
+%A = zeros(2*size(set,2),4);     % 2 equations for each 2D point
+A = []
+A2 =[]; 
+i = 1;
+for j = 1:size(set,2)
+    C = set{2,j};
+    u = set{3,j}(1);
+    v = set{3,j}(2);
+    if u > 0 && v > 0
+        A(2*i-1,:) = [u*C(3,1)-C(1,1), u*C(3,2)-C(1,2), u*C(3,3)-C(1,3), u*C(3,4)-C(1,4)];
+        A(2*i,:) = [v*C(3,1)-C(2,1), v*C(3,2)-C(2,2), v*C(3,3)-C(2,3), v*C(3,4)-C(2,4)];
+        i = i +1;
+    end
 end
+
 B = -A(:,4);
 A = A(:,1:3);
 
