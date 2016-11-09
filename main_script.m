@@ -48,25 +48,22 @@ P(36,:) = [0 80 67 1];
 %% Part 1. Camera Calibration Matrix
 
 
-%C1_eig = calibration_eig(I1, P([33 34 17 18 9 10],:));
+% Set 1
+I1 = imread('Images/DSCF4179.jpg');
+C1 = calibration(I1, P([1,2,3,9,10,11,17,18,19,33,34,35],:));
 
-%I2 = imread('data/DSCF4198.jpg');
-%C2 = calibration(I2, P([1:3 5:7 9:11 13:15 17:19 29:31 33:35],:));
+I2 = imread('Images/DSCF4181.jpg');
+C2 = calibration(I2, P([1,2,4,9,10,12,17,18,20,21,24,25,28,33,36],:));
 
 %pick my set2
 I1 = imread('data/DSCF4177.jpg');
 C1 = calibration(I1, P([1:3 9:11 17:19 33:35], :));
 
-
-
 I2 = imread('data/DSCF4184.jpg');
 C2 = calibration(I2, P([3:4 7:8 23 24 27 28 35 36], :));
 
-
-
 I3 = imread('data/DSCF4186.jpg');
 C3 = calibration(I3, P([4 8 22 23 24 26 27 28 34 35 36], :));
-
 
 I4 = imread('data/DSCF4188.jpg');
 C4 = calibration(I4, P([2 6 10 14 18 26 27 28 34 35 36], :));
@@ -76,6 +73,29 @@ C5 = calibration(I5, P([2 3 6 7 10 11 18 19 34 35], :));
 
 I6 = imread('data/DSCF4199.jpg');
 C6 = calibration(I6, P([1 2 5 6 9:11 17:19 33:35], :));
+
+I3 = imread('Images/DSCF4183.jpg');
+C3 = calibration(I3, P([1,3,4,5,7,8,21,23,24,25,27,28,33,35,36],:));
+
+I4 = imread('Images/DSCF4187.jpg');
+C4 = calibration(I4, P([18,19,24,26,27,28,34,35,36],:));
+
+I5 = imread('Images/DSCF4191.jpg');
+C5 = calibration(I5, P([2,3,6,7,10,11,18,19,23,24,27,28,34,35],:));
+
+I6 = imread('Images/DSCF4195.jpg');
+C6 = calibration(I6, P([1,2,3,9,10,11,17,18,19,33,34,35],:));
+
+set1 = {I1, I2, I3, I4, I5, I6; C1, C2, C3, C4, C5, C6};
+
+%% Part 2. Epipolar Lines
+
+% Run 150 times with each set
+P = epipolar_lines_2(set1, 1);
+
+
+% Position and orientation of each camera
+[O,i,j,k] = camera_origin(C2);
 
 
 % Run 150 times with each set
@@ -88,5 +108,4 @@ for i = 1:2
 end
 
 % Position and orientation of each camera
-[O,i,j,k] = camera_origin(C2);
 
