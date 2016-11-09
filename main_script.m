@@ -47,16 +47,46 @@ P(36,:) = [0 80 67 1];
 
 %% Part 1. Camera Calibration Matrix
 
-I1 = imread('data/DSCF4200.jpg');
-C1 = calibration(I1, P([33 34 17 18 9 10],:));
+
 %C1_eig = calibration_eig(I1, P([33 34 17 18 9 10],:));
 
 %I2 = imread('data/DSCF4198.jpg');
 %C2 = calibration(I2, P([1:3 5:7 9:11 13:15 17:19 29:31 33:35],:));
 
+%pick my set2
+I1 = imread('data/DSCF4177.jpg');
+C1 = calibration(I1, P([1:3 9:11 17:19 33:35], :));
 
 
 
+I2 = imread('data/DSCF4184.jpg');
+C2 = calibration(I2, P([3:4 7:8 23 24 27 28 35 36], :));
 
 
+
+I3 = imread('data/DSCF4186.jpg');
+C3 = calibration(I3, P([4 8 22 23 24 26 27 28 34 35 36], :));
+
+
+I4 = imread('data/DSCF4188.jpg');
+C4 = calibration(I4, P([2 6 10 14 18 26 27 28 34 35 36], :));
+
+I5 = imread('data/DSCF4193.jpg');
+C5 = calibration(I5, P([2 3 6 7 10 11 18 19 34 35], :));
+
+I6 = imread('data/DSCF4199.jpg');
+C6 = calibration(I6, P([1 2 5 6 9:11 17:19 33:35], :));
+
+
+% Run 150 times with each set
+horse = epipolar_lines_2(set2, 1);
+for i = 1:2
+    close all;
+    j = randi(6);
+    horse_again = [horse_again epipolar_lines_2(set2, j)];
+    save('horse_again.mat', 'horse_again');
+end
+
+% Position and orientation of each camera
+[O,i,j,k] = camera_origin(C2);
 
